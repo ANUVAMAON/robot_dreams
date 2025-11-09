@@ -1,0 +1,52 @@
+version: '3.8'
+
+# Definuje tri kľúčové služby pre dátový pipeline
+services:
+
+  # 1. MongoDB - Dátové úložisko
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb_server
+    # Mapovanie pre externý prístup (napr. cez Mongo Compass)
+    ports:
+      - "27017:27017"
+    # Perzistencia dát s využitím Docker Volume
+    volumes:
+      - mongo_data:/data/db
+
+  # 2. Streamlit Importer - Webové UI pre dátový vstup
+  streamlit_importer:
+    build:
+      context: ./streamlit
+    container_name: streamlit_importer_app
+    ports:
+      - "8501:8501" # Exponuje Streamlit UI port
+    depends_on:
+      - mongodb # Zabezpečenie správnej inicializácie databázy
+    # Nastavenie environmentálnych premenných pre MongoDB pripojenie
+    environment:
+      MONGO_HOST: mongodb # Service name acts as hostname
+      MONGO_PORT: 27017
+      DB_NAME: robot_dreams_db
+      COLLECTION_NAME: cvicenie_lekcia_10
+    # Služba je navrhnutá na trvalé bežanie
+
+  # 3. REST API Server - Expozícia dát
+  # api:
+  #   build:
+  #     context: ./api
+  #   container_name: rest_api_server
+  #   # Mapovanie API portu pre externý prístup
+  #   ports:
+  #     - "8080:3000"
+  #   depends_on:
+  #     - mongodb
+  #   # Environmentálne premenné pre API konfiguráciu
+  #   environment:
+  #     MONGO_HOST: mongodb
+  #     MONGO_PORT: 27017
+  #     API_PORT: 3000
+
+# Definuje perzistentné úložisko pre MongoDB
+volumes:
+  mongo_data: 

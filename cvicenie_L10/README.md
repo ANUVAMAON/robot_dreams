@@ -14,10 +14,12 @@
 - **Otvorte Windows terminal a vložte nasledujúci príkaz:**
 
 ```bash
+ cd cesta\ku\priecinku\cvicenie_l10
+```
+```bash
  podman compose -f "docker-compose.yml" -p "cvicenie_l10" up -d
 ```
 alebo
-
 ```bash
  docker-compose -f "docker-compose.yml" -p "cvicenie_l10" up -d
 ```

@@ -1,17 +1,17 @@
 # Základný image
-FROM node:18-slim
+FROM python:3.12-slim
 
 # Definuje pracovný adresár pre aplikáciu
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Kopíruje server skript
-COPY api_server.js .
+COPY flask_api.py /app
 
 # Inštalácia kľúčových závislostí: webový framework a databázový ovládač
-RUN npm install express mongodb
+RUN pip install flask pymongo
 
 # Exponuje aplikačný port
-EXPOSE 3000
+EXPOSE 8080
 
-# Entrypoint: Spustí Node.js proces
-CMD ["node", "api_server.js"]
+# Entrypoint: Spustí Flask server
+CMD ["python", "flask_api.py"]

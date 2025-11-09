@@ -86,11 +86,7 @@ st.markdown(f"**Cieľ:** Databáza `{DB_NAME}`, Kolekcia `{COLLECTION_NAME}`")
 client, collection = connect_to_mongo(MONGO_HOST, MONGO_PORT, DB_NAME, COLLECTION_NAME)
 
 if collection is not None:
-    uploaded_file = st.file_uploader(
-        "Vyberte CSV súbor",
-        type=["csv"],
-        help="Súbor by mal obsahovať stĺpce 'quantity' a 'price_per_unit' pre transformáciu.",
-    )
+    uploaded_file = st.file_uploader("Vyberte CSV súbor", type=["csv"])
 
     if uploaded_file is not None:
         st.success(f"Súbor '{uploaded_file.name}' bol úspešne nahraný.")

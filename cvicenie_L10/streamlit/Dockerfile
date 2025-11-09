@@ -18,5 +18,4 @@ RUN pip install streamlit pymongo pandas
 EXPOSE 8501
 
 # Entrypoint: Spustí Streamlit server
-# CMD ["streamlit", "run", "streamlit_app.py"]
 CMD ["streamlit", "run", "app.py", "--server.port", "8501", "--server.enableCORS", "false", "--server.enableXsrfProtection", "false"]

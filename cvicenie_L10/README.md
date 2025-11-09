@@ -251,11 +251,7 @@ sensor_id, temperature, humidity, pressure, light_level, air_quality_index, loca
 
 ## Spustenie servera
 
-```bash
-python flask_api.py
-```
-
-Server sa spustí na: `http://localhost:8080`
+ - **Api server sa spustí na: `http://localhost:8080`**
 
 ### Logované informácie pri spustení:
 - Dostupné endpointy
